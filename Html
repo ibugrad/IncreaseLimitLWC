@@ -1,0 +1,18 @@
+<template>
+    <div style="height: 500px;">
+        <lightning-datatable
+                key-field="id"
+                data={conList}
+                show-row-number-column
+                hide-checkbox-column
+                columns={columns}>
+             
+        </lightning-datatable>
+    </div>
+    <div class="slds-m-around--medium">
+        <lightning-button
+                label="Increase Limit +5"
+                onclick={increaseLimit}>
+        </lightning-button>
+    </div>
+</template>
