@@ -1,0 +1,31 @@
+import { LightningElement,track,wire } from 'lwc';
+import getcon from '@salesforce/apex/ControllerAccountLwc.getContactRecords';
+export default class GetContact extends LightningElement {
+
+    @track columns = [{
+        label: 'Contact Lastname',fieldName: 'Name', type: 'text',sortable: true  },
+    {
+        label: 'Email',fieldName: 'Email', type: 'email', },
+    {
+        label: 'Phone', fieldName: 'Phone', type: 'phone', },
+    {
+        label: 'Account Name',fieldName: 'Account.Name', type: 'lookup', },
+    
+];
+defaultSortDirection = 'asc';
+sortDirection = 'asc';
+sortedBy;
+limit = 10;
+@track error; //errorlar burada
+@track conList ; //datalar acclistin içinde
+@wire(getcon,{lmt:'$limit'})wiredContacts({error, data }) {
+        if (data) {
+            this.conList = data;
+        } else if (error) {
+            this.error = error;
+        }
+    }
+    increaseLimit() {
+        this.limit += 5;
+    }
+}
